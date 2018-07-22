@@ -40,7 +40,6 @@ $('.save-btn').on('click', function(event) {
     if ($('#title-input').val() === "" || $('#task-input').val() === "") {
        return false;
     };  
-
     numCards++;
     $( ".bottom-box" ).prepend(newCard('card' + numCards, $('#title-input').val(), $('#task-input').val(), qualityVariable)); 
     localStoreCard();
@@ -87,15 +86,27 @@ $(".bottom-box").on('click', function(event){
     localStorage.setItem(cardHTMLId, newCardJSON);
     }
    
-    else if (event.target.className === "delete-button") {
-        var cardHTML = $(event.target).closest('.card-container').remove();
-        var cardHTMLId = cardHTML[0].id;
-        localStorage.removeItem(cardHTMLId);
-    }
+    // else if (event.target.className === "delete-button") {
+    //     var cardHTML = $(event.target).closest('.card-container').remove();
+    //     var cardHTMLId = cardHTML[0].id;
+    //     localStorage.removeItem(cardHTMLId);
+    // }
+    deleteCard();
 });
       
 
 
+var changeQualityVariable = function() {
+
+}
+
+var deleteCard = function() {
+    if (event.target.className === "delete-button") {
+        var cardHTML = $(event.target).closest('.card-container').remove();
+        var cardHTMLId = cardHTML[0].id;
+        localStorage.removeItem(cardHTMLId);
+    }
+}
 
   
 
