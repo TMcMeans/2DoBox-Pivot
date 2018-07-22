@@ -29,11 +29,11 @@ function cardObject() {
 
 //////// FIX PERSISTENCE ISSUE //////////// 
 
-// $.each(localStorage, function(key) {
-//     var cardData = JSON.parse(this);
-//     numCards++;
-//     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
-// });
+$.each(localStorage, function(key) {
+    var cardData = JSON.parse(this);
+    numCards++;
+    $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
+});
 
 
 // stringifies and sets cards in localStorage // 
@@ -62,7 +62,7 @@ function save(event) {
   $( ".bottom-box" ).prepend(newCard('card' + numCards, $('#title-input').val(), $('#task-input').val(), qualityVariable)); 
   localStoreCard();
   $('form')[0].reset();
-  $('.save-btn').prop('disabled', true)
+  $('.save-btn').prop('disabled', true);
 }
 
 // bottom container event listener //
