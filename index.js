@@ -1,8 +1,10 @@
+// global variables //
 var title = $('#title-input').val();
 var body = $('#task-input').val();
 var numCards = 0;
 var qualityVariable = "swill";
 
+// New card's inner html //
 var newCard = function(id , title , body , quality) {
     return '<div id="' + id + '"class="card-container"><h2 class="title-of-card">'  
             + title +  '</h2>'
@@ -16,6 +18,7 @@ var newCard = function(id , title , body , quality) {
             + '</div>';
 };
 
+// A constructor object to populate new cards //
 function cardObject() {
     return {
         title: $('#title-input').val(),
@@ -24,17 +27,23 @@ function cardObject() {
     };
 }
 
-$.each(localStorage, function(key) {
-    var cardData = JSON.parse(this);
-    numCards++;
-    $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
-});
+//////// FIX PERSISTENCE ISSUE //////////// 
 
+// $.each(localStorage, function(key) {
+//     var cardData = JSON.parse(this);
+//     numCards++;
+//     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
+// });
+
+
+// stringifies and sets cards in localStorage // 
 var localStoreCard = function() {
     var cardString = JSON.stringify(cardObject());
     localStorage.setItem('card' + numCards  , cardString);
 }
 
+
+// save button event listener //
 $('.save-btn').on('click', function(event) {
     event.preventDefault();
     if ($('#title-input').val() === "" || $('#task-input').val() === "") {
@@ -46,6 +55,7 @@ $('.save-btn').on('click', function(event) {
     $('form')[0].reset();
 });
 
+// bottom container event listener //
 $(".bottom-box").on('click', function(event){
     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
     var qualityVariable;
@@ -96,10 +106,13 @@ $(".bottom-box").on('click', function(event){
       
 
 
+// change innerText of quality variable 
 var changeQualityVariable = function() {
 
 }
 
+
+// deletes cards on click //
 var deleteCard = function() {
     if (event.target.className === "delete-button") {
         var cardHTML = $(event.target).closest('.card-container').remove();
