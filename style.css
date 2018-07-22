@@ -99,13 +99,13 @@ button {
     width: 45%;
 }
 
-/*.card {
+#card {
     background-color: #ffffff;
     height: auto;
     margin: auto;
     width: 45%;
     border: 20px solid red;
-}*/
+}
 
 .title-of-card{
     color: #6D6E71;

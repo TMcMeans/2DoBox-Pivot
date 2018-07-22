@@ -24,11 +24,11 @@ function cardObject() {
     };
 }
 
-$.each(localStorage, function(key) {
-    var cardData = JSON.parse(this);
-    numCards++;
-    $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
-});
+// $.each(localStorage, function(key) {
+//     var cardData = JSON.parse(this);
+//     numCards++;
+//     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
+// });
 
 var localStoreCard = function() {
     var cardString = JSON.stringify(cardObject());
@@ -46,6 +46,18 @@ $('.save-btn').on('click', function(event) {
     localStoreCard();
     $('form')[0].reset();
 });
+
+// function save(event) {
+//   event.preventDefault();
+//     if ($('#title-input').val() === "" || $('#task-input').val() === "") {
+//        return false;
+//     };  
+
+//     numCards++;
+//     $( ".bottom-box" ).prepend(newCard('card' + numCards, $('#title-input').val(), $('#task-input').val(), qualityVariable)); 
+//     localStoreCard();
+//     $('form')[0].reset();
+// }
 
 $(".bottom-box").on('click', function(event){
     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
