@@ -1,3 +1,41 @@
+/*Universal Styles*/
+body {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/*section styles*/
+h1{
+    color: #6d6e71;
+    display: inline-block;
+    font-size: 275%;
+    margin-bottom:  30px;
+}
+input {
+    align-items: center;
+    display: flex;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 100%;
+    justify-content: space-between;
+    margin: auto;
+}
+h2 {
+   color: #6d6e71; 
+   display: inline-block;
+   font-family: 'Roboto Slab', serif;
+   font-size: 150%;
+}
+
+p {
+    color: #939598;
+    font-family: 'Open Sans', sans-serif;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -5,11 +43,6 @@
 }
 
 .container-box {
-    margin: 0;
-}
-
-body {
-    box-sizing: border-box;
     margin: 0;
 }
 
@@ -21,14 +54,7 @@ body {
     text-align: center;
 }
 
-h1{
-    color: #6d6e71;
-    display: inline-block;
-    font-size: 275%;
-    margin-bottom:  30px;
-}
-
-.idea {
+.todo {
     color: #00a79d;
 }
 
@@ -40,7 +66,7 @@ h1{
     width: 45%;
 }
 
-#body-input {
+#task-input {
     align-items: center;
     display: flex;
     height: 30px;
@@ -67,27 +93,19 @@ h1{
     background-color: #045e55;
 }
 
-input {
-    align-items: center;
-    display: flex;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 100%;
-    justify-content: space-between;
-    margin: auto;
-}
-
 .card-container {
     margin: auto;
     position: relative;
     width: 45%;
 }
 
-.card {
+/*.card {
     background-color: #ffffff;
     height: auto;
     margin: auto;
     width: 45%;
-}
+    border: 20px solid red;
+}*/
 
 .title-of-card{
     color: #6D6E71;
@@ -96,27 +114,10 @@ input {
     font-size: 140%;
 }
 
-h2 {
-   color: #6d6e71; 
-   display: inline-block;
-   font-family: 'Roboto Slab', serif;
-   font-size: 150%;
-}
-
-p {
-    color: #939598;
-    font-family: 'Open Sans', sans-serif;
-}
-
 .body-of-card{
     color: #939598;
     font-family: 'Open Sans', sans-serif;
     font-size: 100%;
-}
-
-button {
-    background-color: transparent;
-    border: none;
 }
 
 .upvote {
@@ -166,7 +167,7 @@ button {
     height: 20px;
     width: 20px;
 }
-
+/*media queries*/
 @media(max-width: 640px){
 
     .card-container {
