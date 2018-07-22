@@ -27,11 +27,8 @@ function cardObject() {
     };
 }
 
-<<<<<<< HEAD
-=======
 //////// FIX PERSISTENCE ISSUE //////////// 
 
->>>>>>> 5d9e118d7b06418b0b9fac2848a807f33899913f
 // $.each(localStorage, function(key) {
 //     var cardData = JSON.parse(this);
 //     numCards++;
@@ -47,33 +44,29 @@ var localStoreCard = function() {
 
 
 // save button event listener //
-$('.save-btn').on('click', function(event) {
-    event.preventDefault();
-    if ($('#title-input').val() === "" || $('#task-input').val() === "") {
-       return false;
-    };  
-    numCards++;
-    $( ".bottom-box" ).prepend(newCard('card' + numCards, $('#title-input').val(), $('#task-input').val(), qualityVariable)); 
-    localStoreCard();
-    $('form')[0].reset();
-});
+$('.save-btn').prop('disabled', true)
+$('#title-input').on('keyup', enableSave)
+$('#task-input').on('keyup', enableSave)
+$('.save-btn').on('click', save)
 
-<<<<<<< HEAD
-// function save(event) {
-//   event.preventDefault();
-//     if ($('#title-input').val() === "" || $('#task-input').val() === "") {
-//        return false;
-//     };  
 
-//     numCards++;
-//     $( ".bottom-box" ).prepend(newCard('card' + numCards, $('#title-input').val(), $('#task-input').val(), qualityVariable)); 
-//     localStoreCard();
-//     $('form')[0].reset();
-// }
+function enableSave(event) {
+  var saveBtn = $('.save-btn')
+  if ($('#title-input').val().length > 0 && $('#task-input').val().length > 0) {
+       saveBtn.prop('disabled', false)
+  }
+}
+function save(event) {
+  event.preventDefault();
+  numCards++;
+  $( ".bottom-box" ).prepend(newCard('card' + numCards, $('#title-input').val(), $('#task-input').val(), qualityVariable)); 
+  localStoreCard();
+  $('form')[0].reset();
+  $('.save-btn').prop('disabled', true)
+}
 
-=======
 // bottom container event listener //
->>>>>>> 5d9e118d7b06418b0b9fac2848a807f33899913f
+
 $(".bottom-box").on('click', function(event){
     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
     var qualityVariable;
