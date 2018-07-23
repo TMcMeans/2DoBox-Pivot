@@ -4,10 +4,10 @@ var numCards = 0;
 var qualityVariable = "swill";
 
 var newCard = function(id , title , body , quality) {
-    return '<div id="' + id + '"class="card-container"><h2 class="title-of-card" onfocusout="changeLocalTitle()" contenteditable="true">'  
+    return '<div id="' + id + '"class="card-container"><h2 class="title-of-card" onfocusout="getLocalCard(event, id)" contenteditable="true">'  
             + title +  '</h2>'
             + '<button class="delete-button"></button>'
-            +'<p class="body-of-card" onfocusout="changeLocalBody()" contenteditable="true">'
+            +'<p class="body-of-card" onfocusout="getLocalCard(event, id)" contenteditable="true">'
             + body + '</p>'
             + '<button class="upvote"></button>' 
             + '<button class="downvote"></button>' 
@@ -24,39 +24,39 @@ function cardObject() {
     };
 }
 
-//////// Fix persistence issue //////////// 
-// $.each(localStorage, function(key) {
-//     var cardData = JSON.parse(this);
-//     numCards++;
-//     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
-// });
+for (var i = 0; i < localStorage.length; i++) {
+    var key = localStorage.key(i);
+    var cardData = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    numCards++;
+    $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
+}
 
-var localStoreCard = function() {
+////// Figure out why cards arent saving to localStorage anymore (but still persisting??) :( /////
+var storeLocalCard = function() {
     var cardString = JSON.stringify(cardObject());
     localStorage.setItem('card' + numCards  , cardString);
 }
 
-// save button event listener //
 $('.save-btn').on('click', function(event) {
     event.preventDefault();
     if ($('#title-input').val() === "" || $('#task-input').val() === "") {
        return false;
     };  
     numCards++;
+    storeLocalCard();
     $( ".bottom-box" ).prepend(newCard('card' + numCards, $('#title-input').val(), $('#task-input').val(), qualityVariable)); 
-    localStoreCard();
     $('form')[0].reset();
 });
 
 ///// Figure out why getlocalcard is UNDEFINED and make localStorage editing work ///// 
-var getlocalCard = function(event) {
+var getLocalCard = function(event, key) {
     var cardHTML = $(event.target).closest('.card-container');
-    var cardHTMLId = cardHTML[0].id;
-    var cardObjectInJSON = localStorage.getItem(cardHTMLId);
+    var key = cardHTML.id;
+    console.log(cardHTML);
+    var cardObjectInJSON = localStorage.getItem(key);
     var cardObjectInJS = JSON.parse(cardObjectInJSON);
-    changeLocalQuality(cardObjectInJS, cardHTMLId);
-    changeLocalTitle(cardObjectInJS, cardHTMLId);
-    changeLocalBody(cardObjectInJS, cardHTMLId);
+    changeLocalQuality(cardObjectInJS, key);
+    changeLocalTitle(event, key);
 }
 
 var changeLocalQuality = function(object, key) {
@@ -65,16 +65,17 @@ var changeLocalQuality = function(object, key) {
     localStorage.setItem(key, newCardJSON);
 }
 
-var changeLocalTitle = function(object, key, event) {
-    object.title = event.target.innerText;
+var changeLocalTitle = function(object, key) {
+    // console.log(object);
+    object.title = object.target.innerText;
     var newCardJSON = JSON.stringify(object);
     localStorage.setItem(key, newCardJSON);
 }
 
-var changeLocalBody = function(object, key, event) {
-    object.body = event.target.innerText;
+var changeLocalBody = function(object, key) {
+    object.body = object.target.innerText;
     var newCardJSON = JSON.stringify(object);
-    localStorage.setItem(key, newCardJSON);
+    localStorage.setItem(object.key, newCardJSON);
 }
 
 var changeQualityVariable = function() {
