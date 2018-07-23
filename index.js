@@ -16,12 +16,17 @@ var newCard = function(id , title , body , quality) {
             + '</div>';
 };
 
-function cardObject() {
-    return {
-        title: $('#title-input').val(),
-        body: $('#task-input').val(),
-        quality: qualityVariable
-    };
+// function cardObject() {
+//     return {
+//         title: $('#title-input').val(),
+//         body: $('#task-input').val(),
+//         quality: qualityVariable
+//     };
+// }
+function Card(title, body, key) {
+  this.title = title;
+  this.body = body;
+  this.key = Date.now();
 }
 
 for (var i = 0; i < localStorage.length; i++) {
@@ -31,7 +36,6 @@ for (var i = 0; i < localStorage.length; i++) {
     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
 }
 
-////// Figure out why cards arent saving to localStorage anymore (but still persisting??) :( /////
 var storeLocalCard = function() {
     var cardString = JSON.stringify(cardObject());
     localStorage.setItem('card' + numCards  , cardString);
@@ -48,7 +52,6 @@ $('.save-btn').on('click', function(event) {
     $('form')[0].reset();
 });
 
-///// Figure out why getlocalcard is UNDEFINED and make localStorage editing work ///// 
 var getLocalCard = function(event, key) {
     var cardHTML = $(event.target).closest('.card-container');
     var key = cardHTML.id;
@@ -59,8 +62,10 @@ var getLocalCard = function(event, key) {
     changeLocalTitle(event, key);
 }
 
+
+
 var changeLocalQuality = function(object, key) {
-    object.quality = qualityVariable;
+    // object.quality = qualityVariable;
     var newCardJSON = JSON.stringify(object);
     localStorage.setItem(key, newCardJSON);
 }
@@ -78,33 +83,17 @@ var changeLocalBody = function(object, key) {
     localStorage.setItem(object.key, newCardJSON);
 }
 
-var changeQualityVariable = function() {
-    var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
+var changeQualityVariable = function(event) {
+    var possibleQualities = ['swill', 'plausible', 'genius'];
+    var currentQuality = $(event.target).siblings('.quality').children().text();
     var qualityVariable;
-        switch (event.target.className === "upvote" || event.target.className === "downvote") {
-            case (event.target.className === "upvote" && currentQuality === "plausible"): 
-                qualityVariable = "genius";
-                $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-                break;
-            case (event.target.className === "upvote" && currentQuality === "swill"): 
-                qualityVariable = "plausible";
-                $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-                break;
-            case (event.target.className === "downvote" && currentQuality === "plausible"):
-                qualityVariable = "swill"
-                $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-                break;
-            case (event.target.className === "downvote" && currentQuality === "genius"):
-                qualityVariable = "plausible"
-                $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-                break;
-            case (event.target.className === "downvote" && currentQuality === "swill"):
-                qualityVariable = "swill";
-                break;
-            case (event.target.className === "upvote" && currentQuality === "genius"): 
-                qualityVariable = "genius";
-                break;
-    }    
+    for (var i = 0; i < possibleQualities.length; i++) {
+        if ((currentQuality === possibleQualities[i]) && ($(event.target).hasClass('upvote'))) {
+            $(event.target).siblings('.quality').children().text(possibleQualities[i + 1]);
+        } else if (currentQuality === possibleQualities[i]) {
+             $(event.target).siblings('.quality').children().text(possibleQualities[i - 1]);
+        }
+    }  
 };
 
 var deleteCard = function() {
@@ -116,13 +105,14 @@ var deleteCard = function() {
 }
 
 $(".bottom-box").on('click', function(event) {
-    changeQualityVariable();
-    getLocalCard(event);
-    deleteCard();
+    // changeQualityVariable();
+    // getLocalCard(event);
+    // deleteCard();
 });      
   
-
-
+$(".downvote").on('click', changeQualityVariable);
+$(".upvote").on('click', changeQualityVariable);
+$(".delete-button").on('click', deleteCard);
 
 
 
