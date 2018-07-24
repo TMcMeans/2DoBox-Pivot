@@ -99,7 +99,8 @@ button {
     width: 45%;
 }
 
-#card {
+.card {
+
     background-color: #ffffff;
     height: auto;
     margin: auto;
