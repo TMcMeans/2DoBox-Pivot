@@ -1,3 +1,4 @@
+
 $(document).ready(persistData);
 
 var newCard = function(card) {
@@ -42,6 +43,21 @@ $('.save-btn').on('click', function(event) {
     var card = new Card($('#title-input').val(), $('#task-input').val(), Date.now());
     newCard(card);
 });
+
+// save button event listener //
+$('.save-btn').prop('disabled', true)
+$('#title-input').on('keyup', enableSave)
+$('#task-input').on('keyup', enableSave)
+
+
+function enableSave(event) {
+  var saveBtn = $('.save-btn')
+  if ($('#title-input').val().length > 0 && $('#task-input').val().length > 0) {
+       saveBtn.prop('disabled', false)
+  }
+}
+
+
 
 var changeQualityVariable = function(event) {
     var possibleQualities = ['swill', 'plausible', 'genius'];
@@ -88,4 +104,3 @@ var deleteCard = function() {
         // localStorage.removeItem(cardHTMLId);
     }
 }     
-
