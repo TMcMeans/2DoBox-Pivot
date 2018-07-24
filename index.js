@@ -27,13 +27,7 @@ function cardObject() {
     };
 }
 
-//////// FIX PERSISTENCE ISSUE //////////// 
-
-// $.each(localStorage, function(key) {
-//     var cardData = JSON.parse(this);
-//     numCards++;
-//     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
-// });
+//Pull from Local Storage//
 
 for (var i = 0; i < localStorage.length; i++) {
     var key = localStorage.key(i);
@@ -43,6 +37,7 @@ for (var i = 0; i < localStorage.length; i++) {
 }
 
 // stringifies and sets cards in localStorage // 
+
 var localStoreCard = function() {
     var cardString = JSON.stringify(cardObject());
     localStorage.setItem('card' + numCards  , cardString);
@@ -53,7 +48,7 @@ var localStoreCard = function() {
 function enableSave(event) {
   var saveBtn = $('.save-btn')
   if ($('#title-input').val().length > 0 && $('#task-input').val().length > 0) {
-       saveBtn.prop('disabled', false)
+       saveBtn.prop('disabled', false);
   }
 }
 function save(event) {
@@ -129,6 +124,25 @@ $(".bottom-box").on('click', function(event){
     }
     deleteCard();
 });
+
+//Search Bar//
+
+$('#search-input').on('keyup', searchCards);
+
+function searchCards(e) {
+    var searchBarValue = $('#search-input').val().toLowerCase();
+    var cardContainer = $('.card-container')
+    cardContainer.filter(index) {
+        var titleLetters = $(this).children('h2').text().toLowerCase;
+        var bodyLetters = $(this).children('p').text().toLowerCase;
+        if(titleLetters === searchBarValue || bodyLetters === searchBarValue) {
+            
+        }
+
+    }
+    console.log(searchBarValue);
+    console.log(textSearch);
+};
 
 
   
