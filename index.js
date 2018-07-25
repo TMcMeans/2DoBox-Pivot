@@ -8,12 +8,14 @@ var newCard = function(card) {
         <button class="upvote"></button>
         <button class="downvote"></button>
         <p class="quality"> quality: <span class="qualityVariable">${card.quality}</span></p>
+        <button class="complete-task-btn">Complete Task</button>
         <hr>
       </div>`);
     storeLocalCard(card);
     $(".downvote").on('click', changeQualityVariable);
     $(".upvote").on('click', changeQualityVariable);
     $(".delete-button").on('click', deleteCard); 
+    $('.complete-task-btn').on('click', completeTask);
 };
 
 function Card(title, body, key) {
@@ -100,21 +102,19 @@ var deleteCard = function(event) {
     }
 }     
 
+function completeTask(event) {
+  if (event.target.className === "complete-task-btn") {
+    $('.complete-task-btn').toggleClass('strike-out').text('Completed');
+    $('.title-of-card').toggleClass('strike-out');
+    $('.body-of-card').toggleClass('strike-out');
+    $('.quality').toggleClass('strike-out');
+  }
+}
 
-//initialize an array that will push the card's innerText values to an array- then iterate 
-//over the array and use .filter prototype to find the words that match??? 
 
-// $('#search-input').on('keyup', searchCards);
 
-// function searchCards(e) {
-//    var searchBarValue = $('#search-input').val().toLowerCase();
-//    var cardContainer = $('.card-container');
-//    cardContainer.filter(function (index) {
-//        var titleLetters = $(this).children('h2').text().toLowerCase;
-//        var bodyLetters = $(this).children('p').text().toLowerCase;
-//        if(titleLetters === searchBarValue || bodyLetters === searchBarValue) {
-           
-//        }
-//    });
-//    console.log(searchBarValue);
-// };
+
+
+
+
+
