@@ -13,14 +13,14 @@ var newCard = function(card) {
     storeLocalCard(card);
     $(".downvote").on('click', changeQualityVariable);
     $(".upvote").on('click', changeQualityVariable);
-    $(".delete-button").on('click', deleteCard); 
+    $(".delete-button").on('click', deleteCard);
 };
 
 function Card(title, body, key) {
   this.title = title;
   this.body = body;
   this.key = key;
-  this.quality = 'swill'
+  this.quality = 'Normal'
 }
 
 function persistData() {
@@ -55,7 +55,7 @@ function enableSave(event) {
 }
 
 var changeQualityVariable = function(event) {
-    var possibleQualities = ['swill', 'plausible', 'genius'];
+    var possibleQualities = ['None', 'Low', 'Normal', 'High', 'Critical'];
     var currentQuality = $(event.target).siblings('.quality').children().text();
     for (var i = 0; i < possibleQualities.length; i++) {
         if ((currentQuality === possibleQualities[i]) && ($(event.target).hasClass('upvote'))) {
