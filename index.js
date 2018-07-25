@@ -1,4 +1,3 @@
-
 $(document).ready(persistData);
 
 var newCard = function(card) {
@@ -44,11 +43,9 @@ $('.save-btn').on('click', function(event) {
     newCard(card);
 });
 
-// save button event listener //
 $('.save-btn').prop('disabled', true)
 $('#title-input').on('keyup', enableSave)
 $('#task-input').on('keyup', enableSave)
-
 
 function enableSave(event) {
   var saveBtn = $('.save-btn')
@@ -56,8 +53,6 @@ function enableSave(event) {
        saveBtn.prop('disabled', false)
   }
 }
-
-
 
 var changeQualityVariable = function(event) {
     var possibleQualities = ['swill', 'plausible', 'genius'];
@@ -97,10 +92,29 @@ var getLocalCard = function(currentCardID) {
     return JSON.parse(localStorage.getItem(currentCardID));
 }
 
-var deleteCard = function() {
+var deleteCard = function(event) {
     if (event.target.className === "delete-button") {
         var cardHTML = $(event.target).closest('.card-container').remove();
-       // TASK//// MAKE SURE ITEM IS DELETED FROM LOCAL STORAGE ///
-        // localStorage.removeItem(cardHTMLId);
+        var cardHTMLId = cardHTML.prop('dataset').id;
+        localStorage.removeItem(cardHTMLId);
     }
 }     
+
+
+//initialize an array that will push the card's innerText values to an array- then iterate 
+//over the array and use .filter prototype to find the words that match??? 
+
+// $('#search-input').on('keyup', searchCards);
+
+// function searchCards(e) {
+//    var searchBarValue = $('#search-input').val().toLowerCase();
+//    var cardContainer = $('.card-container');
+//    cardContainer.filter(function (index) {
+//        var titleLetters = $(this).children('h2').text().toLowerCase;
+//        var bodyLetters = $(this).children('p').text().toLowerCase;
+//        if(titleLetters === searchBarValue || bodyLetters === searchBarValue) {
+           
+//        }
+//    });
+//    console.log(searchBarValue);
+// };
