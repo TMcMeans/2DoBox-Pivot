@@ -111,7 +111,8 @@ function completeTask(event) {
   }
 }
 
-
+//Figure out why toggle class isnt working 
+//Add button for showing all completed tasks
 
 
 
