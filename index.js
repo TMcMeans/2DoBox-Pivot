@@ -50,7 +50,7 @@ $('#task-input').on('keyup', enableSave)
 function enableSave(event) {
   var saveBtn = $('.save-btn')
   if ($('#title-input').val().length > 0 && $('#task-input').val().length > 0) {
-       saveBtn.prop('disabled', false)
+       saveBtn.prop('disabled', false);
   }
 }
 
@@ -100,21 +100,24 @@ var deleteCard = function(event) {
     }
 }     
 
+//Search Bar//
 
-//initialize an array that will push the card's innerText values to an array- then iterate 
-//over the array and use .filter prototype to find the words that match??? 
+$('#search-input').on('keyup', searchCards);
 
-// $('#search-input').on('keyup', searchCards);
+function searchCards(e) {
+    var searchBarValue = $('#search-input').val().toLowerCase();
+    var cardContainer = $('.card-container');
+    cardContainer.filter(function (){
+        var titleLetters = $(this).children('h2').text().toLowerCase();
+        var bodyLetters = $(this).children('p').text().toLowerCase();
+        if(titleLetters.indexOf(searchBarValue) != -1 || bodyLetters.indexOf(searchBarValue) != -1) {
+            $(this).show();
+        }else {
+            $(this).hide();
+        }
+    });
 
-// function searchCards(e) {
-//    var searchBarValue = $('#search-input').val().toLowerCase();
-//    var cardContainer = $('.card-container');
-//    cardContainer.filter(function (index) {
-//        var titleLetters = $(this).children('h2').text().toLowerCase;
-//        var bodyLetters = $(this).children('p').text().toLowerCase;
-//        if(titleLetters === searchBarValue || bodyLetters === searchBarValue) {
-           
-//        }
-//    });
-//    console.log(searchBarValue);
-// };
+    console.log(cardContainer)
+    console.log(searchBarValue);
+
+};
