@@ -52,7 +52,7 @@ $('#task-input').on('keyup', enableSave)
 function enableSave(event) {
   var saveBtn = $('.save-btn')
   if ($('#title-input').val().length > 0 && $('#task-input').val().length > 0) {
-       saveBtn.prop('disabled', false)
+       saveBtn.prop('disabled', false);
   }
 }
 
@@ -102,6 +102,7 @@ var deleteCard = function(event) {
     }
 }     
 
+
 function completeTask(event) {
   if (event.target.className === "complete-task-btn") {
     $('.complete-task-btn').toggleClass('strike-out').text('Completed');
@@ -115,7 +116,24 @@ function completeTask(event) {
 //Add button for showing all completed tasks
 
 
+//Search Bar//
 
+$('#search-input').on('keyup', searchCards);
 
+function searchCards(e) {
+    var searchBarValue = $('#search-input').val().toLowerCase();
+    var cardContainer = $('.card-container');
+    cardContainer.filter(function (){
+        var titleLetters = $(this).children('h2').text().toLowerCase();
+        var bodyLetters = $(this).children('p').text().toLowerCase();
+        if(titleLetters.indexOf(searchBarValue) != -1 || bodyLetters.indexOf(searchBarValue) != -1) {
+            $(this).show();
+        }else {
+            $(this).hide();
+        }
+    });
 
+    console.log(cardContainer)
+    console.log(searchBarValue);
 
+};
