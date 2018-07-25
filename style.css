@@ -19,6 +19,7 @@ input {
     justify-content: space-between;
     margin: auto;
 }
+
 h2 {
    color: #6d6e71; 
    display: inline-block;
@@ -34,6 +35,18 @@ p {
 button {
     background-color: transparent;
     border: none;
+}
+
+.complete-task-btn {
+    font-size: 1.2em;
+    color: #045e55; 
+    margin-left: -8px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+
+.complete-task-btn:hover {
+    color: #00a79d;
 }
 
 .container {
@@ -100,7 +113,6 @@ button {
 }
 
 .card {
-
     background-color: #ffffff;
     height: auto;
     margin: auto;
@@ -168,6 +180,14 @@ button {
     height: 20px;
     width: 20px;
 }
+
+.strike-out {
+    text-decoration: line-through;
+}
+
+
+
+
 /*media queries*/
 @media(max-width: 640px){
 

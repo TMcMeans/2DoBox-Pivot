@@ -8,12 +8,14 @@ var newCard = function(card) {
         <button class="upvote"></button>
         <button class="downvote"></button>
         <p class="quality"> quality: <span class="qualityVariable">${card.quality}</span></p>
+        <button class="complete-task-btn">Complete Task</button>
         <hr>
       </div>`);
     storeLocalCard(card);
     $(".downvote").on('click', changeQualityVariable);
     $(".upvote").on('click', changeQualityVariable);
     $(".delete-button").on('click', deleteCard); 
+    $('.complete-task-btn').on('click', completeTask);
 };
 
 function Card(title, body, key) {
@@ -99,6 +101,20 @@ var deleteCard = function(event) {
         localStorage.removeItem(cardHTMLId);
     }
 }     
+
+
+function completeTask(event) {
+  if (event.target.className === "complete-task-btn") {
+    $('.complete-task-btn').toggleClass('strike-out').text('Completed');
+    $('.title-of-card').toggleClass('strike-out');
+    $('.body-of-card').toggleClass('strike-out');
+    $('.quality').toggleClass('strike-out');
+  }
+}
+
+//Figure out why toggle class isnt working 
+//Add button for showing all completed tasks
+
 
 //Search Bar//
 
