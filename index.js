@@ -16,13 +16,15 @@ var newCard = function(card) {
     $(".upvote").on('click', changeQualityVariable);
     $(".delete-button").on('click', deleteCard); 
     $('.complete-task-btn').on('click', completeTask);
+    $("#title-input").val("");
+    $("#task-input").val("");
 };
 
 function Card(title, body, key) {
   this.title = title;
   this.body = body;
   this.key = key;
-  this.quality = 'swill'
+  this.quality = 'Normal'
 }
 
 function persistData() {
@@ -57,7 +59,7 @@ function enableSave(event) {
 }
 
 var changeQualityVariable = function(event) {
-    var possibleQualities = ['swill', 'plausible', 'genius'];
+    var possibleQualities = ['None', 'Low', 'Normal', 'High', 'Critical'];
     var currentQuality = $(event.target).siblings('.quality').children().text();
     for (var i = 0; i < possibleQualities.length; i++) {
         if ((currentQuality === possibleQualities[i]) && ($(event.target).hasClass('upvote'))) {
@@ -102,7 +104,6 @@ var deleteCard = function(event) {
     }
 }     
 
-
 function completeTask(event) {
   if (event.target.className === "complete-task-btn") {
     $('.complete-task-btn').toggleClass('strike-out').text('Completed');
@@ -111,12 +112,6 @@ function completeTask(event) {
     $('.quality').toggleClass('strike-out');
   }
 }
-
-//Figure out why toggle class isnt working 
-//Add button for showing all completed tasks
-
-
-//Search Bar//
 
 $('#search-input').on('keyup', searchCards);
 
