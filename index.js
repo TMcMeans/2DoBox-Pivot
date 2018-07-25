@@ -104,7 +104,6 @@ var deleteCard = function(event) {
     }
 }     
 
-
 function completeTask(event) {
   if (event.target.className === "complete-task-btn") {
     $('.complete-task-btn').toggleClass('strike-out').text('Completed');
@@ -113,12 +112,6 @@ function completeTask(event) {
     $('.quality').toggleClass('strike-out');
   }
 }
-
-//Figure out why toggle class isnt working 
-//Add button for showing all completed tasks
-
-
-//Search Bar//
 
 $('#search-input').on('keyup', searchCards);
 
