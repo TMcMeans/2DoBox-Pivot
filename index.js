@@ -24,25 +24,6 @@ function Card(title, body, key) {
   this.quality = 'swill'
 }
 
-<<<<<<< HEAD
-//Pull from Local Storage//
-
-for (var i = 0; i < localStorage.length; i++) {
-    var key = localStorage.key(i);
-    var cardData = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    numCards++;
-    $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
-}
-
-// stringifies and sets cards in localStorage // 
-
-var localStoreCard = function() {
-    var cardString = JSON.stringify(cardObject());
-    localStorage.setItem('card' + numCards  , cardString);
-}
-
-//Save Functions//
-=======
 function persistData() {
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
@@ -68,7 +49,6 @@ $('.save-btn').prop('disabled', true)
 $('#title-input').on('keyup', enableSave)
 $('#task-input').on('keyup', enableSave)
 
->>>>>>> db004cb365eaf78ed530d5163e750efe79d4a1e6
 
 function enableSave(event) {
   var saveBtn = $('.save-btn')
@@ -77,26 +57,7 @@ function enableSave(event) {
   }
 }
 
-<<<<<<< HEAD
-// save button event listener //
-$('.save-btn').prop('disabled', true)
-$('#title-input').on('keyup', enableSave)
-$('#task-input').on('keyup', enableSave)
-$('.save-btn').on('click', save)
-
-// deletes cards on click //
-var deleteCard = function() {
-    if (event.target.className === "delete-button") {
-        var cardHTML = $(event.target).closest('.card-container').remove();
-        var cardHTMLId = cardHTML[0].id;
-        localStorage.removeItem(cardHTMLId);
-    }
-}
-
 // bottom container event listener //
-=======
->>>>>>> db004cb365eaf78ed530d5163e750efe79d4a1e6
-
 
 var changeQualityVariable = function(event) {
     var possibleQualities = ['swill', 'plausible', 'genius'];
@@ -130,44 +91,6 @@ var changeLocalCard = function(event) {
         storedCardObj.body = updatedBody; 
         storeLocalCard(storedCardObj);
     }
-<<<<<<< HEAD
-   
-    else if (event.target.className === "delete-button") {
-        var cardHTML = $(event.target).closest('.card-container').remove();
-        var cardHTMLId = cardHTML[0].id;
-        localStorage.removeItem(cardHTMLId);
-    }
-    deleteCard();
-});
-
-//Search Bar//
-
-$('#search-input').on('keyup', searchCards);
-
-function searchCards(e) {
-    var searchBarValue = $('#search-input').val().toLowerCase();
-    var cardContainer = $('.card-container')
-    cardContainer.filter(index) {
-        var titleLetters = $(this).children('h2').text().toLowerCase;
-        var bodyLetters = $(this).children('p').text().toLowerCase;
-        if(titleLetters === searchBarValue || bodyLetters === searchBarValue) {
-            
-        }
-
-    }
-    console.log(searchBarValue);
-    console.log(textSearch);
-};
-
-
-  
-
-
-
-
-
-
-=======
 }
 
 var getLocalCard = function(currentCardID) {
@@ -181,4 +104,35 @@ var deleteCard = function() {
         // localStorage.removeItem(cardHTMLId);
     }
 }     
->>>>>>> db004cb365eaf78ed530d5163e750efe79d4a1e6
+
+//Search Bar//
+
+$('#search-input').on('keyup', searchCards);
+
+function searchCards(e) {
+    var searchBarValue = $('#search-input').val().toLowerCase();
+    var cardContainer = $('.card-container');
+    cardContainer.filter(function (){
+        var titleLetters = $(this).children('h2').text().toLowerCase();
+        var bodyLetters = $(this).children('p').text().toLowerCase();
+        if(titleLetters.indexOf(searchBarValue) != -1 || bodyLetters.indexOf(searchBarValue) != -1) {
+            $(this).show();
+        }else {
+            $(this).hide();
+        }
+    });
+
+    console.log(cardContainer)
+    console.log(searchBarValue);
+
+};
+
+
+
+
+
+
+
+
+
+
