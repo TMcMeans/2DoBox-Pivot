@@ -38,11 +38,11 @@ button {
 }
 
 .complete-task-btn {
-    font-size: 1.2em;
     color: #045e55; 
-    margin-left: -8px;
     font-family: 'Open Sans', sans-serif;
+    font-size: 1.2em;
     font-weight: bold;
+    margin-left: -8px;
 }
 
 .complete-task-btn:hover {
@@ -71,27 +71,6 @@ button {
     color: #00a79d;
 }
 
-#title-input {
-    align-items: center;
-    display: flex;
-    height: 30px;
-    justify-content: space-between;
-    width: 45%;
-}
-
-#task-input {
-    align-items: center;
-    display: flex;
-    height: 30px;
-    justify-content: space-between;
-    width: 45%;
-}
-
-#search-input {
-    height: 30px;
-    margin-top: 50px;
-    width: 45%;
-}
 
 .save-btn {
     background-color: #00a79d;
@@ -114,10 +93,10 @@ button {
 
 .card {
     background-color: #ffffff;
+    border: 20px solid red;
     height: auto;
     margin: auto;
     width: 45%;
-    border: 20px solid red;
 }
 
 .title-of-card{
@@ -185,8 +164,27 @@ button {
     text-decoration: line-through;
 }
 
+#search-input {
+    height: 30px;
+    margin-top: 50px;
+    width: 45%;
+}
 
+#title-input {
+    align-items: center;
+    display: flex;
+    height: 30px;
+    justify-content: space-between;
+    width: 45%;
+}
 
+#task-input {
+    align-items: center;
+    display: flex;
+    height: 30px;
+    justify-content: space-between;
+    width: 45%;
+}
 
 /*media queries*/
 @media(max-width: 640px){

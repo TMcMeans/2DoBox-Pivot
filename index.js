@@ -27,27 +27,33 @@ function revealCards(e) {
 var newCard = function(card) {
     $('.bottom-box').prepend(`<div class="card-container" data-id=${card.key}>
         <h2 class="title-of-card" contenteditable="true" onfocusout="changeLocalCard(event)">${card.title}</h2>
-        <button class="delete-button"></button>
+        <button class="delete-button" onclick="deleteCard(event)"></button>
         <p class="body-of-card" contenteditable="true" onfocusout="changeLocalCard(event)">${card.body}</p>
-        <button class="upvote"></button>
-        <button class="downvote"></button>
+        <button class="upvote" onclick="changeQualityVariable(event)"></button>
+        <button class="downvote" onclick="changeQualityVariable(event)"></button>
         <p class="quality"> quality: <span class="qualityVariable">${card.quality}</span></p>
-        <button class="complete-task-btn">Complete Task</button>
+        <button class="complete-task-btn" onclick="completeTask(event)">Complete Task</button>
         <hr>
       </div>`);
     storeLocalCard(card);
+<<<<<<< HEAD
     $(".downvote").on('click', changeQualityVariable);
     $(".upvote").on('click', changeQualityVariable);
     $(".delete-button").on('click', deleteCard); 
     $('.complete-task-btn').on('click', completeTask);
     hideContent();
+=======
+    $("#title-input").val("");
+    $("#task-input").val("");
+    // setEventListeners();
+>>>>>>> master
 };
 
 function Card(title, body, key) {
   this.title = title;
   this.body = body;
   this.key = key;
-  this.quality = 'swill'
+  this.quality = 'Normal'
 }
 
 function persistData() {
@@ -81,8 +87,8 @@ function enableSave(event) {
   }
 }
 
-var changeQualityVariable = function(event) {
-    var possibleQualities = ['swill', 'plausible', 'genius'];
+function changeQualityVariable(event) {
+    var possibleQualities = ['None', 'Low', 'Normal', 'High', 'Critical'];
     var currentQuality = $(event.target).siblings('.quality').children().text();
     for (var i = 0; i < possibleQualities.length; i++) {
         if ((currentQuality === possibleQualities[i]) && ($(event.target).hasClass('upvote'))) {
@@ -119,7 +125,7 @@ var getLocalCard = function(currentCardID) {
     return JSON.parse(localStorage.getItem(currentCardID));
 }
 
-var deleteCard = function(event) {
+function deleteCard(event) {
     if (event.target.className === "delete-button") {
         var cardHTML = $(event.target).closest('.card-container').remove();
         var cardHTMLId = cardHTML.prop('dataset').id;
@@ -128,21 +134,9 @@ var deleteCard = function(event) {
     }
 }     
 
-
 function completeTask(event) {
-  if (event.target.className === "complete-task-btn") {
-    $('.complete-task-btn').toggleClass('strike-out').text('Completed');
-    $('.title-of-card').toggleClass('strike-out');
-    $('.body-of-card').toggleClass('strike-out');
-    $('.quality').toggleClass('strike-out');
-  }
+  $(event.target).closest('.card-container').children('h2, p, .complete-task-btn').toggleClass('strike-out');
 }
-
-//Figure out why toggle class isnt working 
-//Add button for showing all completed tasks
-
-
-//Search Bar//
 
 $('#search-input').on('keyup', searchCards);
 
@@ -159,8 +153,4 @@ function searchCards(e) {
             $(this).hide();
         }
     });
-
-    console.log(cardContainer)
-    console.log(searchBarValue);
-
 };
