@@ -1,9 +1,5 @@
 $(document).ready(persistData);
-
 $(document).ready(hideContent);
-
-//function dictating when to hide content.
-//I have spliced it into some other functions as well to achieve consistency
 
 function hideContent() {
     if($('.card-container').length === 11 && $('.reveal-content').length != true) {
@@ -17,7 +13,6 @@ function hideContent() {
         $('.reveal-content').remove();
     }
 }
-
 
 function revealCards(e) {
     console.log($('.card-container'));
@@ -36,17 +31,9 @@ var newCard = function(card) {
         <hr>
       </div>`);
     storeLocalCard(card);
-<<<<<<< HEAD
-    $(".downvote").on('click', changeQualityVariable);
-    $(".upvote").on('click', changeQualityVariable);
-    $(".delete-button").on('click', deleteCard); 
-    $('.complete-task-btn').on('click', completeTask);
     hideContent();
-=======
     $("#title-input").val("");
     $("#task-input").val("");
-    // setEventListeners();
->>>>>>> master
 };
 
 function Card(title, body, key) {
