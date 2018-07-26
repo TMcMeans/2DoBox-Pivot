@@ -1,5 +1,28 @@
 $(document).ready(persistData);
 
+$(document).ready(hideContent);
+
+//function dictating when to hide content.
+//I have spliced it into some other functions as well to achieve consistency
+
+function hideContent() {
+    if($('.card-container').length === 11 && $('.reveal-content').length != true) {
+        $('.card-container').slice(10).hide(); 
+        $('.bottom-box').append(`<button class="reveal-content">Show More</button>`);
+        $('.reveal-content').on('click', revealCards);   
+    }else if($('.card-container').length > 10) {
+        $('.card-container').slice(10).hide();
+    }else{
+        $('.card-container').show();
+        $('.reveal-content').remove();
+    }
+}
+
+
+function revealCards(e) {
+    e.target($('.card-container').show());
+}
+
 var newCard = function(card) {
     $('.bottom-box').prepend(`<div class="card-container" data-id=${card.key}>
         <h2 class="title-of-card" contenteditable="true" onfocusout="changeLocalCard(event)">${card.title}</h2>
@@ -16,6 +39,7 @@ var newCard = function(card) {
     $(".upvote").on('click', changeQualityVariable);
     $(".delete-button").on('click', deleteCard); 
     $('.complete-task-btn').on('click', completeTask);
+    hideContent();
 };
 
 function Card(title, body, key) {
@@ -99,6 +123,7 @@ var deleteCard = function(event) {
         var cardHTML = $(event.target).closest('.card-container').remove();
         var cardHTMLId = cardHTML.prop('dataset').id;
         localStorage.removeItem(cardHTMLId);
+        hideContent();
     }
 }     
 
@@ -123,6 +148,7 @@ $('#search-input').on('keyup', searchCards);
 function searchCards(e) {
     var searchBarValue = $('#search-input').val().toLowerCase();
     var cardContainer = $('.card-container');
+    console.log(cardContainer);
     cardContainer.filter(function (){
         var titleLetters = $(this).children('h2').text().toLowerCase();
         var bodyLetters = $(this).children('p').text().toLowerCase();
