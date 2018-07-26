@@ -18,7 +18,6 @@ function hideContent() {
     }
 }
 
-
 function revealCards(e) {
     console.log($('.card-container'));
         $('.card-container').show();
@@ -36,17 +35,13 @@ var newCard = function(card) {
         <hr>
       </div>`);
     storeLocalCard(card);
-<<<<<<< HEAD
     $(".downvote").on('click', changeQualityVariable);
     $(".upvote").on('click', changeQualityVariable);
     $(".delete-button").on('click', deleteCard); 
     $('.complete-task-btn').on('click', completeTask);
     hideContent();
-=======
     $("#title-input").val("");
     $("#task-input").val("");
-    // setEventListeners();
->>>>>>> master
 };
 
 function Card(title, body, key) {
