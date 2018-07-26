@@ -20,7 +20,8 @@ function hideContent() {
 
 
 function revealCards(e) {
-    e.target($('.card-container').show());
+    console.log($('.card-container'));
+        $('.card-container').show();
 }
 
 var newCard = function(card) {
